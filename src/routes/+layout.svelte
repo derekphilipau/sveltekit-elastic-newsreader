@@ -8,7 +8,7 @@
 <div class="app">
 	<Header {data} />
 
-	<main class="container mx-auto min-h-screen px-4 py-4">
+	<main class="container mx-auto min-h-screen px-4">
 		<slot />
 	</main>
 

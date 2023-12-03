@@ -16,11 +16,11 @@
 <Pagination {data} />
 
 <div>
-	{#if data?.results?.length > 0}
+	{#if data?.documents?.length > 0}
 		<ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-			{#each data.results as article}
+			{#each data.documents as article}
 				<li class="col-span-1 divide-y divide-neutral-200 rounded-lg shadow">
-					<ArticleSummaryCard {article} />
+					<ArticleSummaryCard data={article} />
 				</li>
 			{/each}
 		</ul>

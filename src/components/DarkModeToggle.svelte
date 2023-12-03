@@ -82,6 +82,7 @@
 		: 'ring-offset-neutral-700 focus:ring-neutral-400'} cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2"
 	class:hidden
 	on:click={toggle}
+	aria-label="Toggle dark mode"
 >
 	<!-- moon icon -->
 	<svg class="h-5 w-5 text-foreground" class:hidden={!dark} viewBox="0 0 20 20" fill="currentColor">

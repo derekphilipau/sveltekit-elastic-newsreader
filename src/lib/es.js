@@ -44,14 +44,13 @@ export async function initializeIndex() {
 }
 
 /**
- * Transforms a document into a specific format for Elasticsearch.
+ * Transforms an Elasticsearch document into an object used by the system.
  * @param {string} id - The document's unique identifier.
- * @param {Object} document - The original document.
- * @returns {Object} The transformed document.
+ * @param {ElasticsearchArticleDocument} document - The original document.
+ * @returns {ArticleDocument} The transformed document.
  */
 export function transformDocument(id, document) {
 	return {
-		_id: id,
 		title: document.title,
 		link: document.link,
 		slug: document.slug,
@@ -65,24 +64,21 @@ export function transformDocument(id, document) {
 }
 
 /**
- * Retrieves documents from Elasticsearch based on the provided query and page.
+ * Retrieves documents from Elasticsearch based on the provided parameters.
  * @async
- * @param {number} page - The current page number.
- * @param {string} query - The search query.
- * @param {string} subject - The subject filter.
- * @param {string} order - The order filter.
- * @returns {Promise<Object>} An object containing search results and pagination info.
+ * @param {SearchParams} params - The search parameters.
+ * @returns {Promise<SearchResult>} An object containing search results and pagination info.
  */
-export async function getDocuments(page, query, subject, order) {
+export async function getDocuments(params) {
 	let searchQuery = {};
-	const q = query?.trim();
+	const sanitizedQuery = params.query?.trim();
 
-	if (q) {
+	if (sanitizedQuery) {
 		searchQuery = {
 			bool: {
 				must: {
 					multi_match: {
-						query: q,
+						query: sanitizedQuery,
 						fields: ['title^5', 'description^2', 'subject', 'creator']
 					}
 				}
@@ -98,13 +94,13 @@ export async function getDocuments(page, query, subject, order) {
 		};
 	}
 
-	if (subject && subject.trim() !== '') {
+	if (params.subject && params.subject.trim() !== '') {
 		searchQuery.bool = searchQuery.bool || {};
-		searchQuery.bool.filter = [{ term: { subject: subject.trim() } }];
+		searchQuery.bool.filter = [{ term: { subject: params.subject.trim() } }];
 	}
 
 	let sort = [{ date: { order: 'desc' } }];
-	if (order && order.trim() === 'subject') {
+	if (params.order && params.order.trim() === 'subject') {
 		sort = [{ subject: { order: 'asc' }, date: { order: 'desc' } }];
 	}
 
@@ -120,7 +116,7 @@ export async function getDocuments(page, query, subject, order) {
 					}
 				}
 			},
-			from: (page - 1) * PAGE_SIZE || 0,
+			from: (params.page - 1) * PAGE_SIZE || 0,
 			size: PAGE_SIZE,
 			sort,
 			track_total_hits: true
@@ -139,14 +135,16 @@ export async function getDocuments(page, query, subject, order) {
 
 	if (!(response?.hits?.total?.value > 0)) {
 		return {
-			query: q,
-			subject,
-			results: [],
-			subjects,
-			order,
-			count: 0,
-			pages: 0,
-			currentPage: 0
+			documents: [],
+			aggregations: {
+				subjects
+			},
+			meta: {
+				params,
+				count: 0,
+				pages: 0,
+				currentPage: 0
+			}
 		};
 	}
 	const docs = [];
@@ -157,14 +155,16 @@ export async function getDocuments(page, query, subject, order) {
 	let count = response?.hits?.total || 0;
 	if (typeof count !== 'number') count = count.value;
 	return {
-		query: q,
-		subject,
-		results: docs,
-		subjects,
-		order,
-		count,
-		pages: Math.ceil(count / PAGE_SIZE),
-		currentPage: page
+		documents: docs,
+		aggregations: {
+			subjects
+		},
+		meta: {
+			params,
+			count,
+			pages: Math.ceil(count / PAGE_SIZE),
+			currentPage: params.page
+		}
 	};
 }
 
@@ -172,7 +172,7 @@ export async function getDocuments(page, query, subject, order) {
  * Retrieves a single document by its ID from Elasticsearch.
  * @async
  * @param {string} id - The unique identifier of the document.
- * @returns {Promise<Object|undefined>} The retrieved document or null if not found.
+ * @returns {Promise<ArticleDocument|undefined>} The retrieved document or null if not found.
  */
 export async function getDocumentById(id) {
 	try {
@@ -191,7 +191,7 @@ export async function getDocumentById(id) {
 /**
  * Upserts a document into Elasticsearch.
  * @async
- * @param {Object} document - The document to be upserted.
+ * @param {ArticleDocument} document - The document to be upserted.
  * @returns {Promise<undefined>} True if the operation is successful.
  */
 export async function upsertDocument(document) {
