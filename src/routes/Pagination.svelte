@@ -12,6 +12,7 @@
 			{#if data.meta.currentPage > 1}
 				<a
 					type="button"
+					aria-label="Previous Page"
 					class="flex rounded-md px-3 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset ring-neutral-300 hover:bg-accent"
 					href={`?p=${data.meta.currentPage - 1}${data.meta?.params?.query ? '&q=' + data.meta.params.query : ''}`}
 				>
@@ -23,6 +24,7 @@
 			{#if data.meta.currentPage < data.meta.pages}
 				<a
 					type="button"
+					aria-label="Next Page"
 					class="flex rounded-md px-3 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset ring-neutral-300 hover:bg-accent"
 					href={`?p=${data.meta.currentPage + 1}${data.meta?.params?.query ? '&q=' + data.meta.params.query : ''}`}
 				>

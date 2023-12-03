@@ -12,6 +12,7 @@
 					type="search"
 					name="q"
 					placeholder="Search articles..."
+					aria-label="Search query"
 					value={data?.query || ''}
 				/>
 			</form>
@@ -23,6 +24,7 @@
 						<div class="relative flex flex-grow items-stretch focus-within:z-10">
 							<select
 								name="subject"
+								aria-label="Subject Filter"
 								class="block w-full rounded-l-md border-0 bg-background px-2 py-2 text-foreground shadow-sm ring-1 ring-inset ring-accent focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-base sm:leading-6"
 							>
 								<option value="">Select a subject</option>
@@ -34,7 +36,8 @@
 						<button
 							type="submit"
 							class="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-base font-semibold ring-1 ring-inset ring-accent"
-							>Go</button
+							aria-label="Filter"
+							>Filter</button
 						>
 					</div>
 				</form>
