@@ -6,7 +6,7 @@
 {#if data?.value && data?.url}
 	<a href={data.url}>
 		<span
-			class=" inline-flex items-center gap-x-1 rounded-md bg-muted-background px-3 py-2 text-sm font-medium text-muted-foreground ring-1 ring-inset ring-foreground/50"
+			class="bg-muted-background inline-flex items-center gap-x-1 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground ring-1 ring-inset ring-foreground/50"
 		>
 			{data.value}
 			<button type="button" class="group relative -mr-1 h-3.5 w-3.5 rounded-md hover:bg-accent">

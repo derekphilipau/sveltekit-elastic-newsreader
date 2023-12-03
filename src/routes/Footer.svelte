@@ -12,29 +12,3 @@
 		</div>
 	</nav>
 </footer>
-
-<style>
-	footer {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		padding: 24px;
-	}
-
-	footer a {
-		font-weight: bold;
-	}
-
-	footer a img {
-		max-width: 100%;
-		min-width: 140px;
-		height: auto;
-	}
-
-	@media (min-width: 480px) {
-		footer {
-			padding: 12px 0;
-		}
-	}
-</style>

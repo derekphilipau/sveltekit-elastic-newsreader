@@ -61,6 +61,8 @@
 <svelte:head>
 	<!-- set dark mode class based on user preference / device settings (in head to avoid FOUC) -->
 	<!-- set dark mode class based on user preference / device settings (in head to avoid FOUC) -->
+	<!-- set dark mode class based on user preference / device settings (in head to avoid FOUC) -->
+	<!-- set dark mode class based on user preference / device settings (in head to avoid FOUC) -->
 	<script>
 		if (
 			localStorage.theme === 'dark' ||
@@ -76,8 +78,8 @@
 <!-- simple toggle version -->
 <button
 	class="{dark
-		? 'focus:ring-neutral-400 ring-offset-neutral-700'
-		: 'focus:ring-neutral-400 ring-offset-neutral-700'} border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2"
+		? 'ring-offset-neutral-700 focus:ring-neutral-400'
+		: 'ring-offset-neutral-700 focus:ring-neutral-400'} cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2"
 	class:hidden
 	on:click={toggle}
 >
@@ -94,6 +96,3 @@
 		/>
 	</svg>
 </button>
-
-<style global type="postcss">
-</style>

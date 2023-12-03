@@ -3,7 +3,7 @@
 	import DarkModeToggle from '$components/DarkModeToggle.svelte';
 	export let data;
 </script>
-  
+
 <header>
 	<nav class="border-b border-accent">
 		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -17,9 +17,13 @@
 							<a href="/about">About</a>
 						</li>
 						<li>
-							<a href="https://github.com/derekphilipau/sveltekit-elastic-newsreader" target="_blank" rel="noopener noreferrer">
+							<a
+								href="https://github.com/derekphilipau/sveltekit-elastic-newsreader"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
 								<span class="sr-only">GitHub</span>
-								<Github class="w-5 h-5" />
+								<Github class="h-5 w-5" />
 							</a>
 						</li>
 						<li>

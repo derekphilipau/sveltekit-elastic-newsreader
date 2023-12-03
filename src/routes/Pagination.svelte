@@ -4,7 +4,7 @@
 </script>
 
 {#if data?.count && data?.pages && data?.currentPage}
-	<div class="flex items-center gap-x-6 gap-y-2 my-4">
+	<div class="my-4 flex items-center gap-x-6 gap-y-2">
 		<div>
 			Articles {data.currentPage * 10 - 9} to {data.currentPage * 10} of {data.count}
 		</div>
@@ -34,19 +34,3 @@
 		</div>
 	</div>
 {/if}
-
-<style>
-	.pagination-links a {
-		margin-left: 1rem;
-	}
-
-	.pagination-links a:hover {
-		text-decoration: underline;
-	}
-
-	@media (max-width: 768px) {
-		.pagination-links {
-			margin-top: 1rem;
-		}
-	}
-</style>
