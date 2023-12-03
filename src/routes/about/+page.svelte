@@ -3,7 +3,7 @@
 	<meta name="description" content="About this app" />
 </svelte:head>
 
-<article class="prose lg:prose-xl">
+<article class="prose lg:prose-xl dark:prose-invert">
 	<h1>About this app</h1>
 
 	<p>

@@ -1,13 +1,14 @@
 <script>
+	import { X } from 'lucide-svelte';
 	export let data;
 </script>
 
 {#if data}
-	<div class="flex flex-wrap justify-between gap-x-6">
-		<div class="relative flex flex-grow items-stretch items-center  mb-0">
+	<div class="flex flex-wrap justify-between gap-x-6 gap-y-2">
+		<div class="relative flex flex-grow items-stretch mb-0">
 			<form action="/" method="GET" class="w-full m-0 p-0">
 				<input
-					class="w-full rounded-md border-0 py-1.5 px-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-base sm:leading-6"
+					class="w-full rounded-md border-0 py-2 px-2 shadow-sm ring-1 ring-inset ring-accent placeholder:text-muted-foreground focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-base sm:leading-6 text-foreground bg-background"
 					type="search"
 					name="q"
 					placeholder="Search articles..."
@@ -16,13 +17,13 @@
 			</form>
 		</div>
 		{#if !data.subject && data.subjects?.length > 0}
-			<div class="">
+			<div class="relative flex flex-grow items-stretch mb-0">
 				<form action="/" method="GET">
-					<div class="mt-2 flex rounded-md shadow-sm">
+					<div class="flex rounded-md shadow-sm">
 						<div class="relative flex flex-grow items-stretch focus-within:z-10">
 							<select
 								name="subject"
-								class="block w-full rounded-md-l border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-base sm:leading-6"
+								class="block w-full rounded-l-md border-0 py-2 px-2 shadow-sm ring-1 ring-inset ring-accent focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-base sm:leading-6 text-foreground bg-background"
 							>
 								<option value="">Select a subject</option>
 								{#each data.subjects as subject}
@@ -32,7 +33,7 @@
 						</div>
 						<button
 							type="submit"
-							class="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-base font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+							class="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-base font-semibold ring-1 ring-inset ring-accent"
 							>Go</button
 						>
 					</div>
@@ -41,11 +42,11 @@
 		{/if}
 		<div class="">
 			<form action="/" method="GET">
-				<div class="mt-2 flex rounded-md shadow-sm">
+				<div class="flex rounded-md shadow-sm">
 					<div class="relative flex flex-grow items-stretch focus-within:z-10">
 						<select
 							name="order"
-							class="block w-full rounded-md-l border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-base sm:leading-6"
+							class="block w-full rounded-l-md border-0 py-2 px-2 shadow-sm ring-1 ring-inset ring-accent focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-base sm:leading-6 text-foreground bg-background"
 						>
 							{#if data?.order !== 'subject'}
 								<option value="date" selected>Order by date</option>
@@ -58,7 +59,7 @@
 					</div>
 					<button
 						type="submit"
-						class="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-base font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+						class="relative -ml-px inline-flex items-center gap-x-1.5 rounded-r-md px-3 py-2 text-base font-semibold ring-1 ring-inset ring-accent"
 						>Go</button
 					>
 				</div>
@@ -66,8 +67,35 @@
 		</div>
 	</div>
 {/if}
-{#if data.subject}
-	<div class="">
-		<h3>{data.subject} <a href="/">Clear Filter</a></h3>
+{#if data.subject || data.query}
+	<div class="flex items-center py-4">
+		{#if data.subject}
+			<a href="/">
+				<span
+					class=" inline-flex items-center gap-x-1 rounded-md bg-muted-background px-3 py-2 text-sm font-medium text-muted-foreground ring-1 ring-inset ring-foreground/50"
+				>
+					{data.subject}
+					<button type="button" class="group relative -mr-1 h-3.5 w-3.5 rounded-md hover:bg-accent">
+						<span class="sr-only">Remove Filter</span>
+						<X class="h-3.5 w-3.5" />
+						<span class="absolute -inset-1"></span>
+					</button>
+				</span>
+			</a>
+		{/if}
+		{#if data.query}
+			<a href="/">
+				<span
+					class=" inline-flex items-center gap-x-1 rounded-md bg-muted-background px-3 py-2 text-sm font-medium text-muted-foreground ring-1 ring-inset ring-foreground/50"
+				>
+					{data.query}
+					<button type="button" class="group relative -mr-1 h-3.5 w-3.5 rounded-md hover:bg-accent">
+						<span class="sr-only">Remove Filter</span>
+						<X class="h-3.5 w-3.5" />
+						<span class="absolute -inset-1"></span>
+					</button>
+				</span>
+			</a>
+		{/if}
 	</div>
 {/if}
