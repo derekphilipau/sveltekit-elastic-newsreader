@@ -1,5 +1,5 @@
 <script>
-	import { X } from 'lucide-svelte';
+	import FilterBadge from '../components/FilterBadge.svelte';
 	export let data;
 </script>
 
@@ -69,33 +69,7 @@
 {/if}
 {#if data.subject || data.query}
 	<div class="flex items-center py-4">
-		{#if data.subject}
-			<a href="/">
-				<span
-					class=" inline-flex items-center gap-x-1 rounded-md bg-muted-background px-3 py-2 text-sm font-medium text-muted-foreground ring-1 ring-inset ring-foreground/50"
-				>
-					{data.subject}
-					<button type="button" class="group relative -mr-1 h-3.5 w-3.5 rounded-md hover:bg-accent">
-						<span class="sr-only">Remove Filter</span>
-						<X class="h-3.5 w-3.5" />
-						<span class="absolute -inset-1"></span>
-					</button>
-				</span>
-			</a>
-		{/if}
-		{#if data.query}
-			<a href="/">
-				<span
-					class=" inline-flex items-center gap-x-1 rounded-md bg-muted-background px-3 py-2 text-sm font-medium text-muted-foreground ring-1 ring-inset ring-foreground/50"
-				>
-					{data.query}
-					<button type="button" class="group relative -mr-1 h-3.5 w-3.5 rounded-md hover:bg-accent">
-						<span class="sr-only">Remove Filter</span>
-						<X class="h-3.5 w-3.5" />
-						<span class="absolute -inset-1"></span>
-					</button>
-				</span>
-			</a>
-		{/if}
+		<FilterBadge data={{ value: data?.subject, url: '/' }} />
+		<FilterBadge data={{ value: data?.query, url: '/' }} />
 	</div>
 {/if}
