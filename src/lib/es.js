@@ -44,14 +44,13 @@ export async function initializeIndex() {
 }
 
 /**
- * Transforms a document into a specific format for Elasticsearch.
+ * Transforms an Elasticsearch document into an object used by the system.
  * @param {string} id - The document's unique identifier.
- * @param {Object} document - The original document.
- * @returns {Object} The transformed document.
+ * @param {ElasticsearchArticleDocument} document - The original document.
+ * @returns {ArticleDocument} The transformed document.
  */
 export function transformDocument(id, document) {
 	return {
-		_id: id,
 		title: document.title,
 		link: document.link,
 		slug: document.slug,
@@ -65,17 +64,10 @@ export function transformDocument(id, document) {
 }
 
 /**
- * @typedef {Object} SearchParams
- * @property {number} page - The current page number.
- * @property {string} query - The search query.
- * @property {string} subject - The subject filter.
- * @property {string} order - The order filter.
- */
-/**
  * Retrieves documents from Elasticsearch based on the provided parameters.
  * @async
  * @param {SearchParams} params - The search parameters.
- * @returns {Promise<Object>} An object containing search results and pagination info.
+ * @returns {Promise<SearchResult>} An object containing search results and pagination info.
  */
 export async function getDocuments(params) {
 	let searchQuery = {};
@@ -180,7 +172,7 @@ export async function getDocuments(params) {
  * Retrieves a single document by its ID from Elasticsearch.
  * @async
  * @param {string} id - The unique identifier of the document.
- * @returns {Promise<Object|undefined>} The retrieved document or null if not found.
+ * @returns {Promise<ArticleDocument|undefined>} The retrieved document or null if not found.
  */
 export async function getDocumentById(id) {
 	try {
@@ -199,7 +191,7 @@ export async function getDocumentById(id) {
 /**
  * Upserts a document into Elasticsearch.
  * @async
- * @param {Object} document - The document to be upserted.
+ * @param {ArticleDocument} document - The document to be upserted.
  * @returns {Promise<undefined>} True if the operation is successful.
  */
 export async function upsertDocument(document) {

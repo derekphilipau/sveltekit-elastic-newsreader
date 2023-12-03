@@ -15,7 +15,7 @@
 					class="flex rounded-md px-3 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset ring-neutral-300 hover:bg-accent"
 					href={`?p=${data.meta.currentPage - 1}${data.meta?.params?.query ? '&q=' + data.meta.params.query : ''}`}
 				>
-					<ChevronLeft />
+					<ChevronLeft class="w-5 h-5 mr-1" />
 					<span class="sr-only">Previous</span>
 					<span class="hidden lg:inline-block">Previous</span>
 				</a>
@@ -28,7 +28,7 @@
 				>
 					<span class="sr-only">Next</span>
 					<span class="hidden lg:inline-block">Next</span>
-					<ChevronRight />
+					<ChevronRight class="w-5 h-5 ml-1" />
 				</a>
 			{/if}
 		</div>
