@@ -1,5 +1,6 @@
 <script>
 	import { Github } from 'lucide-svelte';
+	import DarkModeToggle from '$components/DarkModeToggle.svelte';
 	export let data;
 </script>
   
@@ -11,15 +12,18 @@
 					<a href="/" class="text-lg font-extrabold"> RSS Reader </a>
 				</div>
 				<div class="inline-flex items-center">
-					<ul class="flex gap-x-6">
+					<ul class="flex items-center gap-x-6">
 						<li aria-current={data?.pathname === '/about' ? 'page' : undefined}>
 							<a href="/about">About</a>
 						</li>
 						<li>
 							<a href="https://github.com/derekphilipau/sveltekit-elastic-newsreader" target="_blank" rel="noopener noreferrer">
 								<span class="sr-only">GitHub</span>
-								<Github />
+								<Github class="w-5 h-5" />
 							</a>
+						</li>
+						<li>
+							<DarkModeToggle />
 						</li>
 					</ul>
 				</div>

@@ -1,5 +1,5 @@
 <script>
-	import FilterBadge from '../components/FilterBadge.svelte';
+	import FilterBadge from '$components/FilterBadge.svelte';
 	export let data;
 </script>
 
