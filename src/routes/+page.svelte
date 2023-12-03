@@ -19,7 +19,7 @@
 	{#if data?.results?.length > 0}
 		<ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
 			{#each data.results as article}
-				<li class="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
+				<li class="col-span-1 divide-y divide-neutral-200 rounded-lg shadow">
 					<ArticleSummaryCard {article} />
 				</li>
 			{/each}

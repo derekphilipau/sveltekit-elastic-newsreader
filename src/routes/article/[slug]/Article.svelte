@@ -2,7 +2,7 @@
 	export let data;
 </script>
 
-<article class="prose lg:prose-xl">
+<article class="prose dark:prose-invert lg:prose-xl">
 	{#if data.subject}
 		<h3 class="article-subject">
 			<a href={`/?subject=${data.subject}`}>{data.subject}</a>
@@ -17,6 +17,3 @@
 
 	{@html data.description}
 </article>
-
-<style>
-</style>
